@@ -1,4 +1,4 @@
-#!/usr/local/bin/slang
+#!/usr/local/bin/webscript
 
 import FileReader.Scanner;
 import System.Collections.Map;
@@ -55,9 +55,9 @@ public void Main( int argc, string args) modify {
 			}
 		}		
 
-		print( cast<string>( line ) + ": " + first + second );
-
 		if ( first || second ) {
+			print( cast<string>( line ) + ": " + first + second );
+
 			assert( first );
 			assert( second );
 		}
