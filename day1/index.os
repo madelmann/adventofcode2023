@@ -1,10 +1,8 @@
 #!/usr/local/bin/slang
 
 import FileReader.Scanner;
-import System.CharacterIterator;
-import System.String;
-import System.Collections.List;
 import System.Collections.Map;
+import System.String;
 
 public void Main( int argc, string args) modify {
 	var file = new Scanner( "input" ).getText();
@@ -45,24 +43,26 @@ public void Main( int argc, string args) modify {
 
 		foreach ( Pair<string, int> pair : digits ) {
 			var firstIdx = line.IndexOf( pair.first );
-			if ( firstIdx != -1 && firstIdx < firstIndex ) {
+			if ( firstIdx != -1 && firstIdx <= firstIndex ) {
 				firstIndex = firstIdx;
 				first = pair.second;
 			}
 
 			var lastIdx = line.LastIndexOf( pair.first );
-			if ( lastIdx != -1 && lastIdx > secondIndex ) {
+			if ( lastIdx != -1 && lastIdx >= secondIndex ) {
 				secondIndex = lastIdx;
 				second = pair.second;
 			}
 		}		
 
 		print( cast<string>( line ) + ": " + first + second );
-		// print( "first: " + first );
-		// print( "second: " + second );
+
+		if ( first || second ) {
+			assert( first );
+			assert( second );
+		}
 
 		sum += cast<int>( first + second );
-		//break;
 	}
 
 	print( "sum: " + sum );
