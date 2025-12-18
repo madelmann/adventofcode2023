@@ -7,7 +7,6 @@ import System.String;
 // project imports
 
 
-
 public object Dial
 {
 	public void Constructor( int startPos )
