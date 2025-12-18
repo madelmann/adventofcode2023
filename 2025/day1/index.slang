@@ -25,19 +25,13 @@ public object Dial
 		var count = cast<int>( substr( direction, 1, strlen( direction ) - 1 ) );
 
 		Position += dir * count;
-
-		if ( Position < 0 ) {
-			Position += 100;
-		}
-		else if ( Position >= 100 ) {
-			Position -= 100;
-		}
-
-		writeln( " => " + Position );
+		Position = Position % 100;
 
 		if ( Position == 0 ) {
 			TurnOver++;
 		}
+
+		writeln( " => " + Position );
 	}
 
 	public int turnover() const {
