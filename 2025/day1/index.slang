@@ -21,16 +21,21 @@ public object Dial
 	}
 
 	public void turn( string direction ) modify {
-		var dir   = (substr( direction, 1 ) == "L") ? -1 : 1;
-		var count = cast<int>( substr( direction, 1, strlen( direction ) - 2 ) );
+		var dir   = (substr( direction, 0, 1 ) == "L") ? -1 : 1;
+		var count = cast<int>( substr( direction, 1, strlen( direction ) - 1 ) );
 
 		Position += dir * count;
-		if ( Position > 99 ) {
-			Position -= 99;
-			TurnOver++;
+
+		if ( Position < 0 ) {
+			Position += 100;
 		}
-		else if ( Position < 0 ) {
-			Position += 99;
+		else if ( Position >= 100 ) {
+			Position -= 100;
+		}
+
+		writeln( " => " + Position );
+
+		if ( Position == 0 ) {
 			TurnOver++;
 		}
 	}
@@ -51,12 +56,11 @@ public void Main( int, string )
 	var dial = new Dial( 50 );
 	foreach ( string str : input.SplitBy( LINEBREAK ) ) {
 		if ( str ) {
-			print( str );
+			write( str );
 			dial.turn( str );
 		}
 	}
 
-	print( "Dial.Position: " + dial.position() );
-	print( "Dial.TurnOver: " + dial.turnover() );
+	print( "Final position " + dial.position() + " with " + dial.turnover() + " turnovers");
 }
 
